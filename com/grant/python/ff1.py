@@ -79,7 +79,7 @@ def main(_):
 			batch_ys = numpy.reshape(batch_ys, [batchSize, 1])
 			sess.run(train_step, feed_dict={x: batch_xs, y_: batch_ys})	
 			summary, entropy = sess.run([merged,cross_entropy], feed_dict={x: batch_xs, y_: batch_ys})		
-			print(entropy)
+			#print(entropy)
 			#print (sess.run( cross_entropy , feed_dict={x: batch_xs, y_: batch_ys}))
 			train_writer.add_summary(summary, i)	
 		# Test trained model
@@ -91,7 +91,7 @@ def main(_):
 		test_xs = numpy.reshape(test_xs, [200, 100])
 		test_ys = numpy.reshape(test_ys, [200, 1])
 		#print (test_xs)
-		#print(sess.run(tf.round(test_ys)))
+		print(sess.run(tf.round(test_ys)))
 		#print(sess.run(tf.abs(y), feed_dict={x: test_xs,y_:test_ys}))
 		#print(sess.run(correct_prediction, feed_dict={x: test_xs,y_:test_ys}))
 		print("acurracy")

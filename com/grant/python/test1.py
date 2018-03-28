@@ -77,6 +77,8 @@ if __name__ == '__main__':
     
     i = 0;
     
+    print " 10 mod 3 =" + str( 10/3) 
+    
     dataSet = readDataSets('/home/grant/Downloads/phd_data/AMC2017-2018.csv');
     
     print dataSet.nextBatch(3);
