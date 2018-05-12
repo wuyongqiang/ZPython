@@ -85,6 +85,19 @@ if __name__ == '__main__':
     
     print dataSet.nextBatch(3);
     
+    tradingData = readDataSets('/home/grant/Downloads/phd_data/AMC2000-2012.csv')
+
+
+    batch_xs, batch_ys = tradingData.nextLstmBatch(100);
+    
+    print "nextLstmBatch"
+    
+    print batch_xs;
+    
+    print batch_ys;
+    
+    
+    
     with open('/home/grant/Downloads/phd_data/AMC2005-2007.csv', 'rb') as f:
         reader = csv.DictReader(f)
         for row in reader:

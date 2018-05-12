@@ -20,7 +20,7 @@ https://www.tensorflow.org/get_started/mnist/beginners
 """
 #from __future__ import absolute_import
 from __future__ import division
-from __future__ import print_function
+#from __future__ import print_function
 
 import csv;
 from util.ff1data import readDataSets;
@@ -34,9 +34,13 @@ import tensorflow as tf;
 FLAGS = None
 
 
-def main(_):		
+def main(_):	
+	
+	#AMC, ANZ, BHP, CBA, NAB, GPT, CIM, CCL
+	stock = "CCL"
+	
 	# Import data
-	tradingData = readDataSets(FLAGS.data_dir)
+	tradingData = readDataSets('/home/grant/Downloads/phd_data/'+stock+'2000-2012.csv')
 	
 	# Create the model
 	x = tf.placeholder(tf.float32, [None, 100], "tradingPrices")
@@ -86,7 +90,7 @@ def main(_):
 		
 		train_writer.close()
 		
-		testData = readDataSets('/home/grant/Downloads/phd_data/AMC2013-2017.csv');
+		testData = readDataSets('/home/grant/Downloads/phd_data/'+stock+'2013-2017.csv');
 		test_xs, test_ys = testData.nextBatch(200)
 		test_xs = numpy.reshape(test_xs, [200, 100])
 		test_ys = numpy.reshape(test_ys, [200, 1])
@@ -100,7 +104,7 @@ def main(_):
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
-	parser.add_argument('--data_dir', type=str, default='/home/grant/Downloads/phd_data/AMC2000-2012.csv',
+	parser.add_argument('--data_dir', type=str, default='',
 	help='Directory for storing input data')
 	FLAGS, unparsed = parser.parse_known_args()
 	tf.app.run()
