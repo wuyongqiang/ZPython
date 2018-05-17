@@ -37,7 +37,7 @@ FLAGS = None
 def main(_):	
 	
 	#AMC, ANZ, BHP, CBA, NAB, GPT, CIM, CCL
-	stock = "CCL"
+	stock = "CBA"
 	
 	# Import data
 	tradingData = readDataSets('/home/grant/Downloads/phd_data/'+stock+'2000-2012.csv')
@@ -63,7 +63,7 @@ def main(_):
 	#cross_entropy = tf.losses.mean_squared_error(y_, y)
 	#cross_entropy = tf.losses.softmax_cross_entropy(y_,y);
 	cross_entropy = tf.reduce_sum(tf.abs(tf.subtract(y_, y)))
-	train_step = tf.train.GradientDescentOptimizer(0.9).minimize(cross_entropy)
+	train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
 	
 	correct_prediction = tf.equal( tf.cast(tf.round(y), tf.int32), tf.cast(tf.round(y_), tf.int32))
 	accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
@@ -90,16 +90,19 @@ def main(_):
 		
 		train_writer.close()
 		
+		print(W.eval())
 		testData = readDataSets('/home/grant/Downloads/phd_data/'+stock+'2013-2017.csv');
 		test_xs, test_ys = testData.nextBatch(200)
 		test_xs = numpy.reshape(test_xs, [200, 100])
 		test_ys = numpy.reshape(test_ys, [200, 1])
 		#print (test_xs)
-		print(sess.run(tf.round(test_ys)))
-		#print(sess.run(tf.abs(y), feed_dict={x: test_xs,y_:test_ys}))
+		#print(sess.run(tf.round(test_ys)))
+		
+		print(sess.run(tf.abs(y), feed_dict={x: test_xs,y_:test_ys}))
 		#print(sess.run(correct_prediction, feed_dict={x: test_xs,y_:test_ys}))
-		print("acurracy")
-		print(sess.run(accuracy, feed_dict={x: test_xs,y_:test_ys}))
+		
+		#print("acurracy")
+		#print(sess.run(accuracy, feed_dict={x: test_xs,y_:test_ys}))
 
 
 if __name__ == '__main__':
