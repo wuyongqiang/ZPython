@@ -7,16 +7,16 @@ Created on Mar 19, 2018
 import csv;
 
 
-def readDataSets(train_dir):    
-    return TradingData(train_dir);
+def readDataSets(train_dir,priceIncrease=1.02):    
+    return TradingData(train_dir,priceIncrease);
 
 class TradingData:
 
-    def __init__(self, dataFilePath):
+    def __init__(self, dataFilePath, priceIncrease=1.02):
         
         self.dataFilePath = dataFilePath;
         self.currentPosition = 0;
-        self.priceIncrease = 1.02;
+        self.priceIncrease = priceIncrease;
         
         self.dataRows = [];
         with open(self.dataFilePath, 'rb') as f:
