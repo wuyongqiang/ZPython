@@ -29,20 +29,6 @@ def earning_pred(y_true, y_pred):
 def buildModel():
     model = Sequential()
     
-    #lstm
-    #model.add(LSTM( 1, return_sequences=True, activation='linear', input_shape=(20,5)))
-    
-    #model.add(LSTM( 3, return_sequences=True, activation='linear'))
-    
-    #model.add(LSTM( 1, return_sequences=True, activation='linear'))
-    
-    #model.add(Dense(5, input_shape=(20,5)))
-    
-    #model.add(Dense(1 ))
-    #model.add(Dropout(0.5))
-    
-    #multi fully connected
-    
     model.add(Dense(2000, kernel_initializer='lecun_uniform', input_shape=(None,100)))
     
     model.add(Dense(200,kernel_initializer='lecun_uniform', activation='relu'))
@@ -63,12 +49,6 @@ def buildModel():
     model.compile(loss='mean_absolute_error', optimizer=myOptimizer, metrics=['accuracy', mean_pred, earning_pred])
 
     return model;
-
-
-     
-
-#AMC, ANZ, BHP, CBA, NAB, GPT, CIM, CCL, ORG(56.0), QAN(35.2), QBE(48.2), SUN(55.6), TLS(73.0), RIO(52.6)
-# AMC(49.4), ANZ(65.0),BHP(36.8%),CBA(67.2%),NAB(59.0%),GPT(57.6%),CIM(57.8%),CCL(62.2%),ORG(44.0%),QBE(51.8%),SUN(55.6),TLS(73.0%),QAN(64.8%),
 
 stocks = ['AMC', 'ANZ', 'BHP', 'CBA', 'NAB', 'GPT', 'CIM', 'CCL'];
 
