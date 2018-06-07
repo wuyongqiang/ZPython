@@ -16,6 +16,8 @@ import matplotlib.pyplot as plt;
 
 model = Sequential()
 
+#time window to train and predict
+
 #lstm
 #model.add(LSTM( 1, return_sequences=True, activation='linear', input_shape=(20,5)))
 

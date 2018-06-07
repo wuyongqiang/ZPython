@@ -8,15 +8,15 @@ import tensorflow as tf;
 
 model = Sequential()
 
-model.add(LSTM( 1, return_sequences=True, activation='linear', input_shape=(20,5)))
+model.add(LSTM( 10, return_sequences=True, activation='linear', input_shape=(20,5)))
 
-#model.add(LSTM( 3, return_sequences=True, activation='linear'))
+model.add(LSTM( 10, return_sequences=True, activation='linear'))
 
-#model.add(LSTM( 1, return_sequences=True, activation='linear'))
+model.add(LSTM( 1, return_sequences=True, activation='linear'))
 
 #model.add(Dense(5, input_shape=(20,5)))
 
-#model.add(Dense(1 ))
+model.add(Dense(1 ))
 #model.add(Dropout(0.5))
 model.add(Activation('tanh'))
 
@@ -37,7 +37,7 @@ rmsProp= RMSprop(lr=0.01);
 model.compile(loss='mean_absolute_error', optimizer=rmsProp, metrics=[mean_pred, earning_pred])
 
 #AMC, ANZ, BHP, CBA, NAB, GPT, CIM, CCL
-stock = "GPT"
+stock = "CCL"
 
 tradingData = readDataSets('/home/grant/Downloads/phd_data/' + stock + '2000-2012.csv')
 
@@ -50,7 +50,7 @@ batch_ys = numpy.reshape(batch_ys, [batchSize*epochSize/20, 20, 1])
 
 #print batch_ys;
                     
-model.fit(batch_xs, batch_ys, epochs=epochSize, batch_size=batchSize)
+model.fit(batch_xs, batch_ys, epochs=10, batch_size=batchSize)
 
 testData =  readDataSets('/home/grant/Downloads/phd_data/'+ stock +'2013-2017.csv');
 
@@ -64,6 +64,6 @@ score = model.evaluate(test_xs, test_ys, batch_size=testDataCount)
 
 print score
 
-#pred_ys = model.predict(test_xs)
+pred_ys = model.predict(test_xs)
 
-#print pred_ys
+print pred_ys
